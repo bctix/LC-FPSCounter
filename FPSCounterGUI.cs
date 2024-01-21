@@ -18,7 +18,6 @@ namespace FPSCounter
 
         private IEnumerator Start()
         {
-            FPSCounterBase.mls.LogInfo("Creating thingy...");
             style = new GUIStyle();
             style.normal.textColor = Color.green;
             style.hover.textColor = Color.green;
