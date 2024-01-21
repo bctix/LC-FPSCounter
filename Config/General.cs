@@ -20,11 +20,6 @@ namespace FPSCounter.Config
             persistentCounterColor = Config.Bind("General", "PersistentCounterColor", PersistentCounterColor.green, "The color of the persistent counter.");
         }
 
-        private static void DisableFPS_SettingChanged(object sender, System.EventArgs e)
-        {
-            HUDPatch._textMesh.enabled = !disableFPS.Value;
-        }
-
         public enum PersistentCounterColor
         {
             green,

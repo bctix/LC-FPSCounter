@@ -72,7 +72,10 @@ namespace FPSCounter
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(10, 0, 100, 25), "FPS: " + Mathf.Round(count), style);
+            if(!Config.General.disableFPS.Value)
+            {
+                GUI.Label(new Rect(10, 0, 100, 25), "FPS: " + Mathf.Round(count), style);
+            }
         }
     }
 }

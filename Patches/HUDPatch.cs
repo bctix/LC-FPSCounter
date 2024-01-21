@@ -41,7 +41,6 @@ namespace FPSCounter.Patches
         {
             _textMesh = UnityEngine.Object.Instantiate(HUDManager.Instance.weightCounter, HUDManager.Instance.weightCounter.transform, false);
             _textMesh.enabled = !Config.General.disableFPS.Value;
-            FPSCounterBase.mls.LogInfo(!Config.General.disableFPS.Value);
             _textMesh.transform.Translate(new Vector3(-0.3f, 0.63f));
         }
     }
