@@ -8,7 +8,9 @@ a simple fps counter for lethal company
 ### 1.2.0
 - Added `PersistantCounterColor` setting.
     - Changes the color of the counter.
-- Fixed fps logging when using `PersistantCounter`
+- `HideCounter` now also hide the Persistant Counter.
+- Removed logs.
+- Fixed fps logging when using `PersistantCounter`.
 
 ---
 ### 1.1.0
