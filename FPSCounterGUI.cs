@@ -5,7 +5,6 @@ namespace FPSCounter
 {
     class FPSCounterGUI : MonoBehaviour
     {
-        // old unused stuff, archiving it tho cause i like to keep the history of my mods.
         private GUIStyle style;
 
         [SerializeField] [Range(0f, 1f)] private static float _expSmoothingFactor = 0.1f;
