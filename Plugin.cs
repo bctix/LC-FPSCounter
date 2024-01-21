@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using UnityEngine;
 
 namespace FPSCounter
 {
@@ -9,7 +10,7 @@ namespace FPSCounter
     {
         private const string modGUID = "bctix.FPSCounter";
         private const string modName = "FPS_Counter";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.1.0";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -32,7 +33,20 @@ namespace FPSCounter
             FPSCounter.Config.General.init(Config);
 
             harmony.PatchAll(typeof(FPSCounterBase));
-            harmony.PatchAll(typeof(Patches.HUDPatch));
+            if(!FPSCounter.Config.General.persistentCounter.Value)
+            {
+                harmony.PatchAll(typeof(Patches.HUDPatch));
+            }
+                
+        }
+
+        private void OnDestroy()
+        {
+            if (FPSCounter.Config.General.persistentCounter.Value)
+            {
+                var FPSGUI = new GameObject("FPSCounterGUI").AddComponent<FPSCounterGUI>();
+                DontDestroyOnLoad(FPSGUI);
+            }
         }
 
     }

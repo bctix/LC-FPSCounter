@@ -8,23 +8,46 @@ namespace FPSCounter
         // old unused stuff, archiving it tho cause i like to keep the history of my mods.
         private GUIStyle style;
 
+        [SerializeField] [Range(0f, 1f)] private static float _expSmoothingFactor = 0.1f;
+        [SerializeField] private static float _refreshFrequency = 0.4f;
+
+        private static float _timeSinceUpdate = 0f;
+        private static float _averageFps = 1f;
+
         private float count;
 
         private IEnumerator Start()
         {
-            style.normal.textColor = new Color(194, 78, 24);
-            //style.font = 
-            //GUI.depth = 2;
+            FPSCounterBase.mls.LogInfo("Creating thingy...");
+            style = new GUIStyle();
+            style.normal.textColor = Color.green;
+            style.hover.textColor = Color.green;
+            style.fontSize = 24;
+            GUI.depth = 2;
             while (true)
             {
-                count = 1f / Time.unscaledDeltaTime;
+                getAverageFPS();
+                FPSCounterBase.mls.LogInfo(count);
                 yield return new WaitForSeconds(0.1f);
             }
         }
 
+        private void getAverageFPS()
+        {
+            _averageFps = _expSmoothingFactor * _averageFps + (1f - _expSmoothingFactor) * 1f / Time.unscaledDeltaTime;
+
+            if (_timeSinceUpdate < _refreshFrequency)
+            {
+                _timeSinceUpdate += Time.deltaTime;
+                return;
+            }
+
+            count = Mathf.RoundToInt(_averageFps);
+        }
+
         private void OnGUI()
         {
-            GUI.Label(new Rect(5, 40, 100, 25), "FPS: " + Mathf.Round(count));
+            GUI.Label(new Rect(10, 0, 100, 25), "FPS: " + Mathf.Round(count), style);
         }
     }
 }
