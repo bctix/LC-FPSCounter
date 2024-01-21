@@ -19,7 +19,6 @@ namespace FPSCounter
         private IEnumerator Start()
         {
             style = new GUIStyle();
-
            switch(Config.General.persistentCounterColor.Value)
            {
                 case Config.General.PersistentCounterColor.green:
@@ -45,6 +44,10 @@ namespace FPSCounter
                 case Config.General.PersistentCounterColor.yellow:
                     style.normal.textColor = Color.yellow;
                     style.hover.textColor = Color.yellow;
+                    break;
+                default:
+                    style.normal.textColor = Color.green;
+                    style.hover.textColor = Color.green;
                     break;
             }
             
