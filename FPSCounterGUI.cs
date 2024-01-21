@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.Reflection;
 
 namespace FPSCounter
 {
@@ -18,14 +19,40 @@ namespace FPSCounter
         private IEnumerator Start()
         {
             style = new GUIStyle();
-            style.normal.textColor = Color.green;
-            style.hover.textColor = Color.green;
+
+           switch(Config.General.persistentCounterColor.Value)
+           {
+                case Config.General.PersistentCounterColor.green:
+                    style.normal.textColor = Color.green;
+                    style.hover.textColor = Color.green;
+                    break;
+                case Config.General.PersistentCounterColor.blue:
+                    style.normal.textColor = Color.blue;
+                    style.hover.textColor = Color.blue;
+                    break;
+                case Config.General.PersistentCounterColor.red:
+                    style.normal.textColor = Color.red;
+                    style.hover.textColor = Color.red;
+                    break;
+                case Config.General.PersistentCounterColor.white:
+                    style.normal.textColor = Color.white;
+                    style.hover.textColor = Color.white;
+                    break;
+                case Config.General.PersistentCounterColor.cyan:
+                    style.normal.textColor = Color.cyan;
+                    style.hover.textColor = Color.cyan;
+                    break;
+                case Config.General.PersistentCounterColor.yellow:
+                    style.normal.textColor = Color.yellow;
+                    style.hover.textColor = Color.yellow;
+                    break;
+            }
+            
             style.fontSize = 24;
             GUI.depth = 2;
             while (true)
             {
                 getAverageFPS();
-                FPSCounterBase.mls.LogInfo(count);
                 yield return new WaitForSeconds(0.1f);
             }
         }
