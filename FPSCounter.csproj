@@ -31,17 +31,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
+    <Reference Include="BepInEx, Version=5.4.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="LethalConfig">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\BepInEx\plugins\LethalConfig\LethalConfig.dll</HintPath>
+    <Reference Include="LethalConfig, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\LethalConfig.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,29 +57,31 @@
     <Reference Include="System.Xml" />
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>Libs\Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>Libs\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>Libs\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>Libs\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\steamStuff\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>Libs\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
