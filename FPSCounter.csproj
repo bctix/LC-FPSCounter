@@ -85,6 +85,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\LethalConfig.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\PersistantCounter.cs" />
     <Compile Include="Config\General.cs" />
     <Compile Include="FPSCounterGUI.cs" />
     <Compile Include="Patches\HUDPatch.cs" />

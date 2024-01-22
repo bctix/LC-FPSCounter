@@ -1,11 +1,13 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using BepInEx.Bootstrap;
 using HarmonyLib;
 using UnityEngine;
 
 namespace FPSCounter
 {
     [BepInPlugin(modGUID, modName, modVersion)]
+    [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)]
     public class FPSCounterBase : BaseUnityPlugin
     {
         private const string modGUID = "bctix.FPSCounter";
@@ -30,23 +32,35 @@ namespace FPSCounter
 
             mls.LogInfo("Hello World!");
 
-            FPSCounter.Config.General.init(Config);
+            FPSCounter.Config.Config.init(Config);
+
+            //DetectedMods
+            var plugins = Chainloader.PluginInfos;
+            if(plugins.ContainsKey("ainavt.lc.lethalconfig"))
+                Compatibility.LethalConfig.init();
+
+            foreach (var plugin in plugins)
+            {
+                mls.LogInfo(plugin);
+            }
+            
 
             harmony.PatchAll(typeof(FPSCounterBase));
-            if(!FPSCounter.Config.General.persistentCounter.Value)
-            {
-                harmony.PatchAll(typeof(Patches.HUDPatch));
-            }
+            harmony.PatchAll(typeof(Patches.HUDPatch));
                 
+        }
+
+        public static void debugLog(object data)
+        {
+#if DEBUG
+            mls.LogInfo(data);
+#endif
         }
 
         private void OnDestroy()
         {
-            if (FPSCounter.Config.General.persistentCounter.Value)
-            {
-                var FPSGUI = new GameObject("FPSCounterGUI").AddComponent<FPSCounterGUI>();
-                DontDestroyOnLoad(FPSGUI);
-            }
+            var FPSGUI = new GameObject("FPSCounterGUI").AddComponent<FPSCounterGUI>();
+            DontDestroyOnLoad(FPSGUI);
         }
 
     }

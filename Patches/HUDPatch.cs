@@ -40,7 +40,10 @@ namespace FPSCounter.Patches
         private static void CopyValueCounter()
         {
             _textMesh = UnityEngine.Object.Instantiate(HUDManager.Instance.weightCounter, HUDManager.Instance.weightCounter.transform, false);
-            _textMesh.enabled = !Config.General.disableFPS.Value;
+            if(Config.General.persistentCounter.Value)
+                _textMesh.enabled = false;
+             else
+                _textMesh.enabled = !Config.General.disableFPS.Value;
             _textMesh.transform.Translate(new Vector3(-0.3f, 0.63f));
         }
     }

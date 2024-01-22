@@ -5,7 +5,7 @@ namespace FPSCounter
 {
     class FPSCounterGUI : MonoBehaviour
     {
-        private GUIStyle style;
+        public static GUIStyle style;
 
         [SerializeField] [Range(0f, 1f)] private static float _expSmoothingFactor = 0.1f;
         [SerializeField] private static float _refreshFrequency = 0.4f;
@@ -15,42 +15,16 @@ namespace FPSCounter
 
         private float count;
 
+        public int XPosition = Config.PersistantCounter.XPosition.Value;
+        public int YPosition = Config.PersistantCounter.YPosition.Value;
+
         private IEnumerator Start()
         {
             style = new GUIStyle();
-           switch(Config.General.persistentCounterColor.Value)
-           {
-                case Config.General.PersistentCounterColor.green:
-                    style.normal.textColor = Color.green;
-                    style.hover.textColor = Color.green;
-                    break;
-                case Config.General.PersistentCounterColor.blue:
-                    style.normal.textColor = Color.blue;
-                    style.hover.textColor = Color.blue;
-                    break;
-                case Config.General.PersistentCounterColor.red:
-                    style.normal.textColor = Color.red;
-                    style.hover.textColor = Color.red;
-                    break;
-                case Config.General.PersistentCounterColor.white:
-                    style.normal.textColor = Color.white;
-                    style.hover.textColor = Color.white;
-                    break;
-                case Config.General.PersistentCounterColor.cyan:
-                    style.normal.textColor = Color.cyan;
-                    style.hover.textColor = Color.cyan;
-                    break;
-                case Config.General.PersistentCounterColor.yellow:
-                    style.normal.textColor = Color.yellow;
-                    style.hover.textColor = Color.yellow;
-                    break;
-                default:
-                    style.normal.textColor = Color.green;
-                    style.hover.textColor = Color.green;
-                    break;
-            }
-            
-            style.fontSize = 24;
+
+            UpdateGUIColor();
+
+            style.fontSize = Config.PersistantCounter.Size.Value;
             GUI.depth = 2;
             while (true)
             {
@@ -72,11 +46,53 @@ namespace FPSCounter
             count = Mathf.RoundToInt(_averageFps);
         }
 
+        public static void UpdateGUISize()
+        {
+            FPSCounterBase.debugLog("Updating GUI size to " + Config.PersistantCounter.Size.Value.ToString());
+            style.fontSize = Config.PersistantCounter.Size.Value;
+        }
+
+        public static void UpdateGUIColor()
+        {
+            FPSCounterBase.debugLog("Updating GUI color to: " + Config.PersistantCounter.Color.Value.ToString());
+
+            switch (Config.PersistantCounter.Color.Value)
+            {
+                case Config.PersistantCounter.PersistentCounterColors.green:
+                    style.normal.textColor = Color.green;
+                    style.hover.textColor = Color.green;
+                    break;
+                case Config.PersistantCounter.PersistentCounterColors.blue:
+                    style.normal.textColor = Color.blue;
+                    style.hover.textColor = Color.blue;
+                    break;
+                case Config.PersistantCounter.PersistentCounterColors.red:
+                    style.normal.textColor = Color.red;
+                    style.hover.textColor = Color.red;
+                    break;
+                case Config.PersistantCounter.PersistentCounterColors.white:
+                    style.normal.textColor = Color.white;
+                    style.hover.textColor = Color.white;
+                    break;
+                case Config.PersistantCounter.PersistentCounterColors.cyan:
+                    style.normal.textColor = Color.cyan;
+                    style.hover.textColor = Color.cyan;
+                    break;
+                case Config.PersistantCounter.PersistentCounterColors.yellow:
+                    style.normal.textColor = Color.yellow;
+                    style.hover.textColor = Color.yellow;
+                    break;
+                default:
+                    style.normal.textColor = Color.green;
+                    style.hover.textColor = Color.green;
+                    break;
+            }
+        }
         private void OnGUI()
         {
-            if(!Config.General.disableFPS.Value)
+            if(!Config.General.disableFPS.Value && Config.General.persistentCounter.Value)
             {
-                GUI.Label(new Rect(10, 0, 100, 25), "FPS: " + Mathf.Round(count), style);
+                GUI.Label(new Rect(Config.PersistantCounter.XPosition.Value, Config.PersistantCounter.YPosition.Value, 100, 25), "FPS: " + Mathf.Round(count), style);
             }
         }
     }
