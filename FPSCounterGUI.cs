@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
 using UnityEngine;
 
 namespace FPSCounter
@@ -22,15 +25,22 @@ namespace FPSCounter
         {
             style = new GUIStyle();
 
+            UpdateGUISize();
             UpdateGUIColor();
+            UpdateGUIFont();
 
-            style.fontSize = Config.PersistantCounter.Size.Value;
             GUI.depth = 2;
             while (true)
             {
                 getAverageFPS();
                 yield return new WaitForSeconds(0.1f);
             }
+        }
+
+        public static void UpdateGUIFont()
+        {
+            FPSCounterBase.debugLog("Updating GUI font to " + Config.PersistantCounter.Font.Value.ToString());
+            style.font = FPSCounterBase.Fonts.LoadAsset<Font>("assets/fonts/"+ Config.PersistantCounter.Font.Value.ToString().Replace("_"," ") + ".ttf");
         }
 
         private void getAverageFPS()
@@ -56,36 +66,15 @@ namespace FPSCounter
         {
             FPSCounterBase.debugLog("Updating GUI color to: " + Config.PersistantCounter.Color.Value.ToString());
 
-            switch (Config.PersistantCounter.Color.Value)
+            if(Config.PersistantCounter.Color.Value != Config.PersistantCounter.PersistentCounterColors.custom)
             {
-                case Config.PersistantCounter.PersistentCounterColors.green:
-                    style.normal.textColor = Color.green;
-                    style.hover.textColor = Color.green;
-                    break;
-                case Config.PersistantCounter.PersistentCounterColors.blue:
-                    style.normal.textColor = Color.blue;
-                    style.hover.textColor = Color.blue;
-                    break;
-                case Config.PersistantCounter.PersistentCounterColors.red:
-                    style.normal.textColor = Color.red;
-                    style.hover.textColor = Color.red;
-                    break;
-                case Config.PersistantCounter.PersistentCounterColors.white:
-                    style.normal.textColor = Color.white;
-                    style.hover.textColor = Color.white;
-                    break;
-                case Config.PersistantCounter.PersistentCounterColors.cyan:
-                    style.normal.textColor = Color.cyan;
-                    style.hover.textColor = Color.cyan;
-                    break;
-                case Config.PersistantCounter.PersistentCounterColors.yellow:
-                    style.normal.textColor = Color.yellow;
-                    style.hover.textColor = Color.yellow;
-                    break;
-                default:
-                    style.normal.textColor = Color.green;
-                    style.hover.textColor = Color.green;
-                    break;
+                style.normal.textColor = (Color)typeof(Color).GetProperty(Config.PersistantCounter.Color.Value.ToString()).GetValue(null, null);
+                style.hover.textColor = (Color)typeof(Color).GetProperty(Config.PersistantCounter.Color.Value.ToString()).GetValue(null, null);
+            } else
+            {
+                var color = new Color(Config.PersistantCounter.R.Value / 255f, Config.PersistantCounter.G.Value / 255f, Config.PersistantCounter.B.Value / 255f);
+                style.normal.textColor = color;
+                style.hover.textColor = color;
             }
         }
         private void OnGUI()

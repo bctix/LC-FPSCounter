@@ -3,6 +3,9 @@ using BepInEx.Logging;
 using BepInEx.Bootstrap;
 using HarmonyLib;
 using UnityEngine;
+using System.IO;
+using System.Reflection;
+using System;
 
 namespace FPSCounter
 {
@@ -20,6 +23,7 @@ namespace FPSCounter
 
         public static ManualLogSource mls;
 
+        public static AssetBundle Fonts;
 
         void Awake()
         {
@@ -31,6 +35,15 @@ namespace FPSCounter
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
 
             mls.LogInfo("Hello World!");
+
+            string sAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            Fonts = AssetBundle.LoadFromFile(Path.Combine(sAssemblyLocation, "fpsfonts"));
+            if (Fonts == null)
+            {
+                mls.LogError("Failed to load custom assets."); // ManualLogSource for your plugin
+                return;
+            }
 
             FPSCounter.Config.Config.init(Config);
 
